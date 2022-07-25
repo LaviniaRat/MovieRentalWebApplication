@@ -1,0 +1,54 @@
+.container-fluid {
+    background-color:#383E42;
+}
+
+.navbar {
+   padding: 0px;
+}
+
+.nav-link {
+    color:white;
+}
+.nav-link .active {
+    color:white;
+}
+.navbar-brand{
+    color:white;
+    font-size:30px;
+}
+
+#background-container{
+    background-image:url("/images1/friendsCoverFinal3.webp");
+    background-repeat: repeat-0;
+    height:800px;
+}
+h1{
+    font-size:25px;
+    color:white;
+    font-style:italic;
+}
+h2{
+    font-size:18px;
+    color:white;
+    font-style:italic;
+}
+
+.about-container{
+ background-image:url("/images1/bricks_background.jpeg");
+    height:800px
+}
+
+#h1_about{
+padding-left:400px;
+padding-top:100px;
+}
+
+#h2_about{
+    padding-left:450px;
+}
+
+.container{
+ color:black;
+}
+
+
