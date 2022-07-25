@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MOVIE</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+<header>
+
+
+<nav>
+    <div class="logo">
+        <img src="/images/logo.jpeg"/>
+    </div>
+    <ul>
+        <li><a class="active" href="home.html">Home</a></li>
+        <li> <a href="movies.html">Movies</a></li>
+        <li> <a href="#contact">Users</a></li>
+        <li> <a href="about.html">About</a></li>
+        <div class="search-container">
+            <form action="/movies" method="post" id="form" role="search">
+                <input type="text" id="query" name="query">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </ul>
+
+</nav>
+</header>
+
+
+<table>
+    <tr>
+        <th> ID</th>
+        <th> NAME</th>
+        <th>DESCRIPTION</th>
+        <th>CATEGORY</th>
+        <th>RELEASE YEAR</th>
+        <th>LENGTH</th>
+        <th>RENTAL DURATION</th>
+
+    </tr>
+    <tr th:each="movie: ${movies}" >
+        <td th:text="${movie.filmId}"></td>
+        <td th:text="${movie.title}"></td>
+        <td th:text="${movie.description}"> </td>
+        <td th:text="${movie.category}"> </td>
+        <td th:text="${movie.releaseYear}"> </td>
+        <td th:text="${movie.length}"> </td>
+        <td th:text="${movie.rentalDuration}"> </td>
+    </tr>
+</table>
+
+</body>
+</html>
