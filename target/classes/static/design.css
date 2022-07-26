@@ -39,16 +39,22 @@ h2{
 }
 
 #h1_about{
-padding-left:400px;
+padding-left:520px;
 padding-top:100px;
 }
 
 #h2_about{
-    padding-left:450px;
+    padding-left:550px;
 }
 
 .container{
  color:black;
+}
+
+#backgroundMovie-container{
+    background-image:url("/images1/bricks_background.jpeg");
+    color:white;
+    height:2000px
 }
 
 

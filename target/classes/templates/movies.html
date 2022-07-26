@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>MOVIE</title>
-    <link th:href="@{/style.css}" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movie Rental</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link th:href="@{/design.css}" rel="stylesheet" />
+
 </head>
-
 <body>
-<header>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MOVIE RENTAL</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="home">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Movie Categories
+          </a>
+          <ul class="dropdown-menu" >
+            <li th:each="category: ${categoryList}">
+              <a class="dropdown-item" th:href='@{/movies(category=${category})}' th:text="${category}"></a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about">About Us</a>
+        </li>
 
-
-<nav>
-    <div class="logo">
-        <img src="/images/logo.jpeg"/>
+      </ul>
+      <form action="/movies" class="d-flex" method="post" id="form" role="search">
+        <input type="text" id="query" name="query" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
-    <ul>
-        <li><a class="active" href="home.html">Home</a></li>
-        <li> <a href="movies.html">Movies</a></li>
-        <li> <a href="#contact">Users</a></li>
-        <li> <a href="about.html">About</a></li>
-        <div class="search-container">
-            <form action="/movies" method="post" id="form" role="search">
-                <input type="text" id="query" name="query">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-    </ul>
-
+  </div>
 </nav>
-</header>
-
-
-<table>
-    <tr>
+<div id="backgroundMovie-container">
+  <div>
+    <table>
+      <tr>
         <th> ID</th>
         <th> NAME</th>
         <th>DESCRIPTION</th>
@@ -41,8 +57,8 @@
         <th>LENGTH</th>
         <th>RENTAL DURATION</th>
 
-    </tr>
-    <tr th:each="movie: ${movies}" >
+      </tr>
+      <tr th:each="movie: ${movies}" >
         <td th:text="${movie.filmId}"></td>
         <td th:text="${movie.title}"></td>
         <td th:text="${movie.description}"> </td>
@@ -50,8 +66,13 @@
         <td th:text="${movie.releaseYear}"> </td>
         <td th:text="${movie.length}"> </td>
         <td th:text="${movie.rentalDuration}"> </td>
-    </tr>
-</table>
 
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>

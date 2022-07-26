@@ -23,31 +23,18 @@ public class MovieRentalController {
         return "home.html";
     }
 
-
     @GetMapping("/movies")
-    public String viewList(Model model) {
-        List<Movie> movieList = movieService.displayList();
+    public String viewList(Model model, @RequestParam String category) {
+        List<Movie> movieList;
+        if (category == null || category.isEmpty()) {
+            movieList = movieService.displayList();
+        } else {
+            movieList = movieService.getMovies(category);
+        }
+        List<String> categoryList = movieService.getCategories();
         model.addAttribute("movies", movieList);
+        model.addAttribute("categoryList", categoryList);
         return "movies.html";
-    }
-
-    @PostMapping("/movie")
-    public void addMovie(
-            @RequestParam String title,
-            @RequestParam String description,
-            @RequestParam int releaseYear,
-            @RequestParam int length,
-            @RequestParam int rentalDuration,
-            Model model
-    ){
-        Movie p = new Movie();
-        p.setTitle(title);
-        p.setDescription(description);
-        p.setLength(length);
-        p.setReleaseYear(releaseYear);
-        p.setRentalDuration(rentalDuration);
-        movieService.addMovie(p);
-
     }
 
     @PostMapping("/movies")
@@ -56,6 +43,4 @@ public class MovieRentalController {
         model.addAttribute("movies", searchList);
         return "movies.html";
     }
-
-
 }

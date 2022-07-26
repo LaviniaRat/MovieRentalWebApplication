@@ -40,18 +40,18 @@ public class MovieRentalService {
                 int filmId = res.getInt("film_id");
                 String title = res.getString("title");
                 String description = res.getString("description");
+                String category = res.getString("name");
                 int releaseYear =res.getInt("release_year");
                 int length =res.getInt("length");
                 int rentalDuration =res.getInt("rental_duration");
-                String category = res.getString("name");
                 Movie movie = new Movie();
                 movie.setFilmId(filmId);
                 movie.setTitle(title);
                 movie.setDescription(description);
+                movie.setCategory(category);
                 movie.setReleaseYear(releaseYear);
                 movie.setLength(length);
                 movie.setRentalDuration(rentalDuration);
-                movie.setCategory(category);
                 movieList.add(movie);
             }
             res.close();
@@ -124,5 +124,36 @@ public class MovieRentalService {
         return categoryList;
     }
 
+    public List<Movie> getMovies(String category){
+        List<Movie> searchCategory= new ArrayList<>();
+        try {
+            Statement stm = c.createStatement();
+            ResultSet res = stm.executeQuery("" +
+                    "select f.film_id, f.title, f.description,c.name\n"+
+                    "from category c\n"+
+                    "join film_category fc on c.category_id = fc.category_id\n" +
+                    "join film f on fc.film_id = f.film_id\n"+
+                    "where c.name = '" + category +"'");
+
+            while(res.next()){
+                int filmId = res.getInt("film_id");
+                String title = res.getString("title");
+                String description = res.getString("description");
+                String movieCategory = res.getString("name");
+                Movie searchCat = new Movie();
+                searchCat.setFilmId(filmId);
+                searchCat.setTitle(title);
+                searchCat.setDescription(description);
+                searchCat.setCategory(movieCategory);
+                searchCategory.add(searchCat);
+            }
+            res.close();
+            stm.close();
+        } catch (SQLException e) {
+            System.out.println("ERRORRRRRRR" + e);
+            e.printStackTrace();
+        }
+        return searchCategory;
+    }
 }
 

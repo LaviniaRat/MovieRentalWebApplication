@@ -21,7 +21,6 @@ public class LocationController {
     public String locationPage(Model model) {
         List<Location> locationList = locationService.getLocation();
         model.addAttribute("locationList", locationList);
-
         List<String> categoryList = movieService.getCategories();
         model.addAttribute("categoryList", categoryList);
         return "about.html";
