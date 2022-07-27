@@ -4,7 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class MovieRentalService {
@@ -44,6 +46,7 @@ public class MovieRentalService {
                 int releaseYear =res.getInt("release_year");
                 int length =res.getInt("length");
                 int rentalDuration =res.getInt("rental_duration");
+
                 Movie movie = new Movie();
                 movie.setFilmId(filmId);
                 movie.setTitle(title);
@@ -93,7 +96,6 @@ public class MovieRentalService {
                 searchmovie.setCategory(category);
                 searchmovie.setReleaseYear(releaseYear);
                 searchmovie.setLength(length);
-                searchmovie.setRentalDuration(rentalDuration);
                 searchList.add(searchmovie);
             }
             res.close();
@@ -128,24 +130,75 @@ public class MovieRentalService {
         List<Movie> searchCategory= new ArrayList<>();
         try {
             Statement stm = c.createStatement();
-            ResultSet res = stm.executeQuery("" +
-                    "select f.film_id, f.title, f.description,c.name\n"+
+            String myQuery=  "select f.film_id, f.title, f.description,c.name,f.release_year,f.length\n"+
                     "from category c\n"+
                     "join film_category fc on c.category_id = fc.category_id\n" +
                     "join film f on fc.film_id = f.film_id\n"+
-                    "where c.name = '" + category +"'");
+                    "where c.name = ?";
+            PreparedStatement pstm = c.prepareStatement(myQuery);
+            pstm.setString(1,category);
+            ResultSet res = pstm.executeQuery();
 
             while(res.next()){
                 int filmId = res.getInt("film_id");
                 String title = res.getString("title");
                 String description = res.getString("description");
-                String movieCategory = res.getString("name");
+                String movieCategory = res.getString(1);
+                int releaseYear =res.getInt("release_year");
+                int length =res.getInt("length");
                 Movie searchCat = new Movie();
                 searchCat.setFilmId(filmId);
                 searchCat.setTitle(title);
                 searchCat.setDescription(description);
                 searchCat.setCategory(movieCategory);
+                searchCat.setReleaseYear(releaseYear);
+                searchCat.setLength(length);
                 searchCategory.add(searchCat);
+
+            }
+            res.close();
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println("ERRORRRRRRR" + e);
+            e.printStackTrace();
+        }
+        return searchCategory;
+
+    }
+
+    public List<Movie> getMostRented(){
+        List<Movie> rentedList= new ArrayList<>();
+        try {
+            Statement stm = c.createStatement();
+            ResultSet res = stm.executeQuery("" +
+                    "select f.film_id, f.title, f.description,c.name, f.release_year, f.length, count(p.amount)\n" +
+                    "from film f\n" +
+                    "join film_category fc on f.film_id= fc.film_id\n" +
+                    "join category c on fc.category_id = c.category_id\n" +
+                    "join inventory inv on f.film_id = inv.film_id\n" +
+                    "join rental r on inv.inventory_id = r.inventory_id\n" +
+                    "join payment p on r.rental_id = p.rental_id\n" +
+                    "group by f.film_id, f.title, f.description, c.name\n" +
+                    "order by count(p.amount) desc\n" +
+                    "limit 3\n");
+
+            Random randomGenerator = new Random();
+            while(res.next()){
+                int filmId = res.getInt("film_id");
+                String title = res.getString("title");
+                String description = res.getString("description");
+                String movieCategory = res.getString("name");
+                int releaseYear =res.getInt("release_year");
+                int length =res.getInt("length");
+                Movie rented = new Movie();
+                rented.setFilmId(filmId);
+                rented.setTitle(title);
+                rented.setDescription(description);
+                rented.setCategory(movieCategory);
+                rented.setReleaseYear(releaseYear);
+                rented.setLength(length);
+                rented.setImageName(Movie.IMAGES.get(randomGenerator.nextInt(Movie.IMAGES.size())));
+                rentedList.add(rented);
             }
             res.close();
             stm.close();
@@ -153,7 +206,7 @@ public class MovieRentalService {
             System.out.println("ERRORRRRRRR" + e);
             e.printStackTrace();
         }
-        return searchCategory;
+        return rentedList;
     }
 }
 
