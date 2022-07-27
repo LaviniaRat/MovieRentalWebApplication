@@ -17,6 +17,7 @@
     font-size:30px;
 }
 
+
 #background-container{
     background-image:url("/images1/friendsCoverFinal3.webp");
     background-repeat: repeat-0;
@@ -34,13 +35,13 @@ h2{
 }
 
 .about-container{
- background-image:url("/images1/bricks_background.jpeg");
+    background-image:url("/images1/dark-grey.jpeg");
     height:800px
 }
 
 #h1_about{
-padding-left:520px;
-padding-top:100px;
+    padding-left:520px;
+    padding-top:100px;
 }
 
 #h2_about{
@@ -48,13 +49,53 @@ padding-top:100px;
 }
 
 .container{
- color:black;
+    color:black;
 }
 
 #backgroundMovie-container{
-    background-image:url("/images1/bricks_background.jpeg");
+    background-image:url("/images1/dark-grey.jpeg");
     color:white;
     height:2000px
 }
+th{
+    padding-left:50px;
+}
+
+td{
+p   adding-left:50px;
+}
+
+#rented-movie{
+    padding-top:50px;
+    padding-left:550px;
+
+}
+#rented-actor{
+    padding-top:50px;
+    padding-left:550px;
+
+}
+
+#rented-container{
+     background-image:url("/images1/dark-grey.jpeg");
+    color:white;
+    height:2000px
+}
+
+.card-body{
+    background-image:url("/images2/light-gray.jpeg");
+    color:black
+}
+
+
+#img-card{
+    width:150px;
+    height:100px;
+}
+#act-card{
+    width:200px;
+    height:150px;
+}
+
 
 

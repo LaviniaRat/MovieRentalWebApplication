@@ -1,10 +1,16 @@
 package com.rental;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Movie {
+    public final static List<String> IMAGES = Arrays.asList("frost.jpg", "duck.webp", "grit.jpeg","friendsCoverFinal3.webp","shock.jpg","submarine.jpeg");
+
     private int filmId;
     private String title;
     private String description;
     private String category;
+    private String imageName;
     private int releaseYear;
     private int length;
     private int rentalDuration;
@@ -35,6 +41,14 @@ public class Movie {
 
     public int getRentalDuration(){
         return rentalDuration;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public void setFilmId(int filmId){

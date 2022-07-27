@@ -31,7 +31,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Users</a>
+          <a class="nav-link" href="rented">Most Rented</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="about">About Us</a>
@@ -55,7 +55,6 @@
         <th>CATEGORY</th>
         <th>RELEASE YEAR</th>
         <th>LENGTH</th>
-        <th>RENTAL DURATION</th>
 
       </tr>
       <tr th:each="movie: ${movies}" >
@@ -65,7 +64,6 @@
         <td th:text="${movie.category}"> </td>
         <td th:text="${movie.releaseYear}"> </td>
         <td th:text="${movie.length}"> </td>
-        <td th:text="${movie.rentalDuration}"> </td>
 
       </tr>
     </table>
