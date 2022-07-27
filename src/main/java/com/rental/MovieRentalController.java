@@ -32,8 +32,9 @@ public class MovieRentalController {
         } else {
             movieList = movieService.getMovies(category);
         }
-        List<String> categoryList = movieService.getCategories();
         model.addAttribute("movies", movieList);
+
+        List<String> categoryList = movieService.getCategories();
         model.addAttribute("categoryList", categoryList);
         return "movies.html";
     }

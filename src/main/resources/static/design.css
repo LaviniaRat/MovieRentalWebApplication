@@ -62,7 +62,7 @@ th{
 }
 
 td{
-p   adding-left:50px;
+    padding-left:50px;
 }
 
 #rented-movie{
@@ -95,6 +95,10 @@ p   adding-left:50px;
 #act-card{
     width:200px;
     height:150px;
+}
+
+.btn-primary{
+    background-color:#3a5a40;
 }
 
 
