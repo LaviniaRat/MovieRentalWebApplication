@@ -130,20 +130,21 @@ public class MovieRentalService {
         List<Movie> searchCategory= new ArrayList<>();
         try {
             Statement stm = c.createStatement();
-            String myQuery=  "select f.film_id, f.title, f.description,c.name,f.release_year,f.length\n"+
-                    "from category c\n"+
-                    "join film_category fc on c.category_id = fc.category_id\n" +
-                    "join film f on fc.film_id = f.film_id\n"+
+            String myQuery=  "select f.film_id, f.title, f.description, " +
+                    "c.name as category, f.release_year, f.length "+
+                    "from category c "+
+                    "join film_category fc on c.category_id = fc.category_id " +
+                    "join film f on fc.film_id = f.film_id "+
                     "where c.name = ?";
             PreparedStatement pstm = c.prepareStatement(myQuery);
-            pstm.setString(1,category);
+            pstm.setString(1, category);
             ResultSet res = pstm.executeQuery();
 
             while(res.next()){
                 int filmId = res.getInt("film_id");
                 String title = res.getString("title");
                 String description = res.getString("description");
-                String movieCategory = res.getString(1);
+                String movieCategory = res.getString("category");
                 int releaseYear =res.getInt("release_year");
                 int length =res.getInt("length");
                 Movie searchCat = new Movie();
