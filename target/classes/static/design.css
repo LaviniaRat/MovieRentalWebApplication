@@ -84,7 +84,10 @@ td{
 
 .card-body{
     background-image:url("/images2/light-gray.jpeg");
-    color:black
+    color:black;
+    border:none;
+
+
 }
 
 
@@ -95,10 +98,12 @@ td{
 #act-card{
     width:200px;
     height:150px;
+
 }
 
 .btn-primary{
     background-color:#3a5a40;
+    border: none;
 }
 
 
